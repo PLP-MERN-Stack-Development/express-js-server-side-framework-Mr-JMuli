@@ -7,13 +7,13 @@ Developed as part of the **PLP Academy Full Stack MERN Program (Week 2 Assignmen
 
 ---
 
-## ⚙️ Setup & Run Instructions
+## Setup & Run Instructions
 
 ### Step 1: Clone the repository
 
 ```bash
-git clone <your-repository-url>
-cd <repository-folder>
+git clone https://github.com/Mr-JMuli/express-js-server-side-framework-Mr-JMuli.git
+cd <your-repository-folder>
 ```
 
 ### Step 2: Install dependencies
@@ -53,7 +53,7 @@ Server running on http://localhost:5000
 
 ---
 
-## 🌐 Base URL
+## Base URL
 
 ```
 http://localhost:5000/api
@@ -61,7 +61,7 @@ http://localhost:5000/api
 
 ---
 
-## 📘 API Endpoints Documentation
+## API Endpoints Documentation
 
 | Method | Endpoint           | Description               | Auth Required |
 |--------|--------------------|---------------------------|----------------|
@@ -79,7 +79,7 @@ Authorization: Bearer mysecrettoken
 
 ---
 
-## 📊 Example Requests & Responses
+## Example Requests & Responses
 
 ### ✅ 1. Get All Products
 
@@ -202,7 +202,7 @@ Authorization: Bearer mysecrettoken
 
 ---
 
-## 🧪 Testing the API
+##  Testing the API
 
 You can test the API using **Postman**, **Insomnia**, or the **curl** command-line tool.
 
@@ -250,7 +250,7 @@ curl -X DELETE http://localhost:5000/api/products/1 \
 
 ---
 
-## 📁 Folder Structure
+##  Folder Structure
 
 ```
 project/
@@ -269,9 +269,8 @@ project/
 
 ---
 
-## 🧠 Author
+##  Author
 
 **John Muli**  
-🎓 PLP Full Stack MERN Program  
-💼 GitHub: [your-github-link]  
-📧 Email: [your-email]
+ PLP Full Stack MERN Program  
+
