@@ -1,234 +1,277 @@
-🛒 Express.js RESTful API — Week 2 Assignment (PLP Full Stack MERN)
+# 🛒 Express.js RESTful API — Week 2 Assignment (PLP Full Stack MERN)
 
-An Express.js-based RESTful API that manages a products resource through CRUD operations.
-This project demonstrates routing, middleware, environment variables, authentication, error handling, and advanced API features such as filtering, pagination, and search.
+An **Express.js-based RESTful API** for managing a **Products** resource.  
+This project demonstrates CRUD operations, routing, middleware, authentication, environment variables, and structured API documentation.
 
-Developed as part of the PLP Academy MERN Full Stack Program (Week 2 Assignment).
+Developed as part of the **PLP Academy Full Stack MERN Program (Week 2 Assignment)**.
 
-✨ Features
+---
 
-CRUD Operations — Create, Read, Update, and Delete products
+## ⚙️ Setup & Run Instructions
 
-Middleware Integration — Logging, Authentication, and Error Handling
+### Step 1: Clone the repository
 
-Filtering, Search & Pagination — Retrieve products based on category, price range, or keyword
-
-Environment Variables — Secure and configurable runtime setup
-
-Structured Routing — Organized RESTful API design following best practices
-
-Postman-ready Endpoints — Easy to test using Postman, curl, or Insomnia
-
-🛠️ Setup Instructions
-Prerequisites
-
-Node.js v18+
-
-Git
-
-VS Code
-
-API testing tool (Postman, Insomnia, or curl)
-
-Step 1: Clone the repository
-git clone <your-github-repository-url>
+```bash
+git clone <your-repository-url>
 cd <repository-folder>
+```
 
-Step 2: Install dependencies
+### Step 2: Install dependencies
+
+```bash
 npm install
+```
 
-Step 3: Set environment variables
+### Step 3: Set environment variables
 
-Create a .env file in your project root with the following contents:
+Create a `.env` file in your project root with the following contents:
 
+```env
 PORT=5000
 AUTH_TOKEN=mysecrettoken
+```
 
-Step 4: Run the server
+### Step 4: Run the server
 
 To start the server, use:
 
+```bash
 npm start
-
+```
 
 Or for development (auto restart):
 
+```bash
 npx nodemon server.js
-
+```
 
 The server should display:
 
+```
 Server running on http://localhost:5000
+```
 
-🌐 Base URL
+---
 
-http://localhost:5000/api/products
+## 🌐 Base URL
 
-📘 API Endpoints
-Method	Endpoint	Description	Authentication
-GET	/api/products	Get all products (supports filtering, pagination, and search)	❌
-GET	/api/products/:id	Retrieve a single product by ID	❌
-POST	/api/products	Create a new product	✅
-PUT	/api/products/:id	Update an existing product	✅
-DELETE	/api/products/:id	Delete a product	✅
-🔐 Authentication
+```
+http://localhost:5000/api
+```
 
-Protected routes require a Bearer token in the request header.
+---
 
-Example:
+## 📘 API Endpoints Documentation
 
+| Method | Endpoint           | Description               | Auth Required |
+|--------|--------------------|---------------------------|----------------|
+| GET    | `/api/products`     | Get all products          | ❌ No |
+| GET    | `/api/products/:id` | Get a single product by ID| ❌ No |
+| POST   | `/api/products`     | Create a new product      | ✅ Yes |
+| PUT    | `/api/products/:id` | Update a product by ID    | ✅ Yes |
+| DELETE | `/api/products/:id` | Delete a product by ID    | ✅ Yes |
+
+**Authentication:**  
+Protected routes require the header:  
+```
 Authorization: Bearer mysecrettoken
+```
 
+---
 
-If missing or invalid, the API returns:
+## 📊 Example Requests & Responses
 
-{ "error": "Unauthorized: Invalid or missing token" }
+### ✅ 1. Get All Products
 
-🔎 Filtering, Search, and Pagination
+**Request**
+```bash
+GET /api/products
+```
 
-You can use query parameters to refine your results.
+**Response**
+```json
+[
+  {
+    "id": 1,
+    "name": "Panadol",
+    "price": 100,
+    "description": "Pain relief tablet"
+  }
+]
+```
 
-Parameter	Type	Description	Example
-search	String	Search by product name	/api/products?search=laptop
-category	String	Filter by category	/api/products?category=Pharmacy
-minPrice	Number	Minimum price filter	/api/products?minPrice=100
-maxPrice	Number	Maximum price filter	/api/products?maxPrice=1000
-page	Number	Page number (default: 1)	/api/products?page=2
-limit	Number	Items per page (default: 5)	/api/products?limit=10
+---
 
-Example combined request:
+### ✅ 2. Get Product by ID
 
-GET /api/products?category=Electronics&minPrice=500&page=1&limit=5
+**Request**
+```bash
+GET /api/products/1
+```
 
-📊 Example Requests and Responses
-1️⃣ Get All Products
-
-Request
-
-GET http://localhost:5000/api/products
-
-
-Response
-
-{
-  "total": 2,
-  "page": 1,
-  "limit": 5,
-  "data": [
-    { "id": 1, "name": "Laptop", "price": 85000, "category": "Electronics" },
-    { "id": 2, "name": "Paracetamol", "price": 100, "category": "Pharmacy" }
-  ]
-}
-
-2️⃣ Get Single Product
-
-Request
-
-GET http://localhost:5000/api/products/1
-
-
-Response
-
+**Response**
+```json
 {
   "id": 1,
-  "name": "Laptop",
-  "price": 85000,
-  "category": "Electronics"
+  "name": "Panadol",
+  "price": 100,
+  "description": "Pain relief tablet"
 }
+```
 
-3️⃣ Create Product
+---
 
-Request
+### ✅ 3. Create Product
 
-POST http://localhost:5000/api/products
+**Request**
+```bash
+POST /api/products
 Authorization: Bearer mysecrettoken
 Content-Type: application/json
+```
 
-
-Body
-
+**Body**
+```json
 {
-  "name": "Vitamin C",
-  "price": 250,
-  "category": "Pharmacy"
+  "name": "Aspirin",
+  "price": 150,
+  "description": "Used for pain and inflammation"
 }
+```
 
-
-Response
-
+**Response**
+```json
 {
-  "id": 3,
-  "name": "Vitamin C",
-  "price": 250,
-  "category": "Pharmacy"
+  "message": "Product created successfully",
+  "product": {
+    "id": 2,
+    "name": "Aspirin",
+    "price": 150,
+    "description": "Used for pain and inflammation"
+  }
 }
+```
 
-4️⃣ Update Product
+---
 
-Request
+### ✅ 4. Update Product
 
-PUT http://localhost:5000/api/products/1
+**Request**
+```bash
+PUT /api/products/1
 Authorization: Bearer mysecrettoken
 Content-Type: application/json
+```
 
-
-Body
-
+**Body**
+```json
 {
-  "price": 90000
+  "price": 120
 }
+```
 
-
-Response
-
+**Response**
+```json
 {
-  "id": 1,
-  "name": "Laptop",
-  "price": 90000,
-  "category": "Electronics"
+  "message": "Product updated successfully",
+  "product": {
+    "id": 1,
+    "name": "Panadol",
+    "price": 120,
+    "description": "Pain relief tablet"
+  }
 }
+```
 
-5️⃣ Delete Product
+---
 
-Request
+### ✅ 5. Delete Product
 
-DELETE http://localhost:5000/api/products/3
+**Request**
+```bash
+DELETE /api/products/1
 Authorization: Bearer mysecrettoken
+```
 
+**Response**
+```json
+{
+  "message": "Product deleted successfully"
+}
+```
 
-Response
+---
 
-{ "message": "Product deleted successfully" }
+## 🧪 Testing the API
 
-⚠️ Error Handling
-Status Code	Example Response	Description
-400	{ "error": "Invalid input data" }	Bad request or missing fields
-401	{ "error": "Unauthorized: Invalid or missing token" }	Token not provided
-404	{ "error": "Product not found" }	Product ID doesn’t exist
-500	{ "error": "Server error" }	Internal server issue
-🧩 Environment Variables
+You can test the API using **Postman**, **Insomnia**, or the **curl** command-line tool.
 
-The API uses the following environment variables:
+### 🔹 Using Postman
 
-Variable	Description	Example
-PORT	Defines the port where the server runs	5000
-AUTH_TOKEN	API access token for protected routes	mysecrettoken
-🌱 Future Improvements
+1. Open Postman and create a new request.  
+2. Enter the request URL (e.g. `http://localhost:5000/api/products`).  
+3. Choose the HTTP method (GET, POST, PUT, DELETE).  
+4. For protected routes (POST, PUT, DELETE), go to the **Headers** tab and add:
+   ```
+   Key: Authorization
+   Value: Bearer mysecrettoken
+   ```
+5. For POST and PUT requests, set the **Body** to “raw” and select “JSON” type.
+6. Click **Send** and check the response.
 
-Add MongoDB integration for persistent storage
+### 🔹 Using curl
 
-Add input validation using Joi or Express Validator
+**Get all products**
+```bash
+curl http://localhost:5000/api/products
+```
 
-Implement Swagger API documentation
+**Create a product**
+```bash
+curl -X POST http://localhost:5000/api/products \
+  -H "Authorization: Bearer mysecrettoken" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Vitamin C","price":250,"description":"Boosts immunity"}'
+```
 
-Include user authentication and role-based access
+**Update a product**
+```bash
+curl -X PUT http://localhost:5000/api/products/1 \
+  -H "Authorization: Bearer mysecrettoken" \
+  -H "Content-Type: application/json" \
+  -d '{"price":300}'
+```
 
-👤 Author
+**Delete a product**
+```bash
+curl -X DELETE http://localhost:5000/api/products/1 \
+  -H "Authorization: Bearer mysecrettoken"
+```
 
-John Muli
-PLP Full Stack MERN — Week 2 Assignment
-November 2025
+---
 
-📜 License
+## 📁 Folder Structure
 
-MIT License – Free to use, modify, and distribute.
+```
+project/
+├── server.js
+├── routes/
+│   └── productRoutes.js
+├── controllers/
+│   └── productController.js
+├── middleware/
+│   ├── authMiddleware.js
+│   └── errorMiddleware.js
+├── .env
+├── package.json
+└── README.md
+```
+
+---
+
+## 🧠 Author
+
+**John Muli**  
+🎓 PLP Full Stack MERN Program  
+💼 GitHub: [your-github-link]  
+📧 Email: [your-email]
